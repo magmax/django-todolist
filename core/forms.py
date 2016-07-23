@@ -13,6 +13,7 @@ from core.models import *
 
 class TodoListForm(forms.ModelForm):
     class Meta:
+        fields = ['name']
         model = TodoList
         widgets = {
             'name': forms.TextInput(attrs={
@@ -27,7 +28,7 @@ class TodoListForm(forms.ModelForm):
 class TodoForm(forms.ModelForm):
     class Meta:
         model = Todo
-        excludes = ['todolist']
+        exclude = ['todolist']
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'input-text',
@@ -50,4 +51,3 @@ class TodoForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
-

@@ -15,7 +15,7 @@ class TodoList(models.Model):
     class Meta:
         db_table = u"todolist"
 
-    def __unicode__(self):
+    def __str__(self):
         return u"#%s - %s" % (self.pk, self.name.title())
 
     @property
@@ -34,7 +34,7 @@ class Todo(models.Model):
     class Meta:
         db_table = u"todo"
 
-    def __unicode__(self):
+    def __str__(self):
         return u"#%s - %s" % (self.pk, self.name.title())
 
     def change_state(self):
