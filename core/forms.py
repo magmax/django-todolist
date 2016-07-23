@@ -13,7 +13,7 @@ from core.models import *
 
 class TodoListForm(forms.ModelForm):
     class Meta:
-        fields = ['name']
+        exclude = []
         model = TodoList
         widgets = {
             'name': forms.TextInput(attrs={
