@@ -8,7 +8,10 @@ Copyright (c) 2013 Multmeio [design+tecnologia]. All rights reserved.
 """
 # Django settings for todolist project.
 
-DEBUG = True
+import os
+
+
+DEBUG = not os.getenv('PRODUCTION', False)
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -19,12 +22,16 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'db.sqlite3',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': (
+            'django.db.backends.postgresql_psycopg2'
+            if os.getenv('PRODUCTION', False)
+            else 'django.db.backends.sqlite3'
+        ), # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.getenv('django_db_name', 'db.sqlite3'),           # Or path to database file if using sqlite3.
+        'USER': os.getenv('POSTGRES_USER', ''),                      # Not used with sqlite3.
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),              # Not used with sqlite3.
+        'HOST': os.getenv('POSTGRES_HOST', ''),                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': os.getenv('POSTGRES_PORT', ''),                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -86,7 +93,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'eozk%rho#5162&amp;6k9mi+u$(7udr1=^zck+4q5mf@me7ayh28@6'
+SECRET_KEY = os.getenv('DJANGO_KEY', 'eozk%rho#5162&amp;6k9mi+u$(7udr1=^zck+4q5mf@me7ayh28@6')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
