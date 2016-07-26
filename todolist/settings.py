@@ -27,7 +27,7 @@ DATABASES = {
             if os.getenv('PRODUCTION', False)
             else 'django.db.backends.sqlite3'
         ), # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.getenv('django_db_name', 'db.sqlite3'),           # Or path to database file if using sqlite3.
+        'NAME': os.getenv('POSTGRES_DB', 'db.sqlite3'),           # Or path to database file if using sqlite3.
         'USER': os.getenv('POSTGRES_USER', ''),                      # Not used with sqlite3.
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),              # Not used with sqlite3.
         'HOST': os.getenv('POSTGRES_HOST', ''),                      # Set to empty string for localhost. Not used with sqlite3.
